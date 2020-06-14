@@ -1,16 +1,29 @@
-import os, time
+# -*- coding: utf-8 -*-
+import os, time, Person
 
 class Generator(object):
-	def __init__(self, arg):
+	Character = None
+	ActionCards = None
+	Bunker = None
+	Catastrophe = None
+	def __init__(self):
 		super(Generator, self).__init__()
-		self.arg = arg
 
 	def FileApp(self):
-		Character = open("Character.txt", "w")
-		ActionCards = open("ActionCards.txt", "w")
-		Bunker = open("Bunker.txt", "w")
-		Catastrophe = open("Catastrophe.txt", "w")
+		self.Character = open("Character.txt", "r")
+		self.ActionCards = open("ActionCards.txt", "r")
+		self.Bunker = open("Bunker.txt", "r")
+		self.Catastrophe = open("Catastrophe.txt", "r")
+	def GeneratePerson(Num):
+		for NewPerson in range(Num):
+			NewPersonFile = open(str(NewPerson), "w")
+			NewPersonInst = Person()
+			NewPersonInst.Generate()
+			NewPersonFile.close()
 
 def main():
-	Generator = Generator()
-	Generator.FileApp()
+	GeneratorInst = Generator()
+	GeneratorInst.FileApp()
+
+if __name__ == '__main__':
+	main()

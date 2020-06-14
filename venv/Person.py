@@ -1,10 +1,7 @@
-class Person:
-    def __init__(self):
-        pass
+class Person(object):
 
-    class Hobby:
-        def getHobby(self):
-            pass
-    class Age:
-        def getAge(self):
-            pass
+	def __init__(self, arg):
+		super(Person, self).__init__()
+		self.arg = arg
+	def getProf(self):
+		pass
