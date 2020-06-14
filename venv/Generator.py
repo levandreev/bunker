@@ -1,5 +1,6 @@
-# -*- coding: utf-8 -*-
-import os, time, Person
+# -*- coding: UTF-8 -*-
+import os, time
+import Person as Pers
 
 class Generator(object):
 	Character = None
@@ -10,20 +11,20 @@ class Generator(object):
 		super(Generator, self).__init__()
 
 	def FileApp(self):
-		self.Character = open("Character.txt", "r")
-		self.ActionCards = open("ActionCards.txt", "r")
-		self.Bunker = open("Bunker.txt", "r")
-		self.Catastrophe = open("Catastrophe.txt", "r")
-	def GenerateCharacter(Num):
+		self.Character = open("Character.txt", "r", encoding='utf-8')
+		self.ActionCards = open("ActionCards.txt", "r", encoding='utf-8')
+		self.Bunker = open("Bunker.txt", "r", encoding='utf-8')
+		self.Catastrophe = open("Catastrophe.txt", "r", encoding='utf-8')
+	def GenerateCharacter(self,	Num):
 		for NewCharacter in range(Num):
-			NewPerson = Person(Character)
-			NewPerson.Output = open(str(Num)+".txt", "w")
+			NewPerson = Pers.Person(self.Character)
+			#NewPerson.OutputFile = open(str(Num)+".dxt", "w", encoding='utf-8')
 			NewPerson.Generate()
 
 def main():
 	GeneratorInst = Generator()
 	GeneratorInst.FileApp()
-	GenratorInst.GenerateCharacter(2)
+	GeneratorInst.GenerateCharacter(2)
 
 if __name__ == '__main__':
 	main()
