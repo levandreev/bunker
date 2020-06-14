@@ -2,6 +2,8 @@ class Person(object):
 	OutputFile = None
 	PersonFile = None
 	profList = list()
+	hobbyList = list()
+	traitList = list()
 
 
 
@@ -9,10 +11,20 @@ class Person(object):
 		super(Person, self).__init__()
 		self.PersonFile = PersonF
 		self.getProf()
+		self.getHobby()
+		self.getTrait()
+
 	def getProf(self):
 		self.profList = self.Parse("=ПРОФЕССИИ=")
 		print(self.profList)
+	def getHobby(self):
+		self.hobbyList = self.Parse("=ХОББИ=")
+		print(self.hobbyList)
+	def getTrait(self):
+		self.traitList = self.Parse("=ЧЕРТЫ=")
+		print(self.traitList)
 	def Parse(self, mod):
+		self.PersonFile.seek(0)
 		result = list()
 		FirstEntry = False
 		for lineNum, Line in enumerate(self.PersonFile, 1):
@@ -26,4 +38,4 @@ class Person(object):
 		return result
 
 	def Generate(self):
-		self.getProf()
+		pass
