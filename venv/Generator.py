@@ -17,12 +17,13 @@ class Generator(object):
 	def GenerateCharacter(Num):
 		for NewCharacter in range(Num):
 			NewPerson = Person(Character)
-			NewPerson.output = open(str(Num)+".txt", "w")
-			NewPerson.generate()
+			NewPerson.Output = open(str(Num)+".txt", "w")
+			NewPerson.Generate()
 
 def main():
 	GeneratorInst = Generator()
 	GeneratorInst.FileApp()
+	GenratorInst.GenerateCharacter(2)
 
 if __name__ == '__main__':
 	main()
