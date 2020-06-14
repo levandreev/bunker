@@ -1,3 +1,4 @@
+import random
 class Person(object):
 	OutputFile = None
 	PersonFile = None
@@ -38,4 +39,20 @@ class Person(object):
 		return result
 
 	def Generate(self):
-		pass
+		# Пол, возраст, ориентация
+		# Профессия
+		#
+		Sex = random.randint(1, 100)
+		if Sex < 60:
+			Sex = "мужчина"
+		else:
+			Sex = "женщина"
+		Age = random.randint(16, 100)
+		Orientation = random.randint(1, 100)
+		if Orientation < 60:
+			Orientation = "гетеро"
+		else:
+			Orientation = "гомо"
+		self.OutputFile.writelines("Пол: {}, возраст: {}, ориентация: {}\n".format(Sex, str(Age), Orientation))
+		self.OutputFile.writelines("Профессия: чет")
+		self.OutputFile.close()

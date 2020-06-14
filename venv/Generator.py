@@ -16,15 +16,16 @@ class Generator(object):
 		self.Bunker = open("Bunker.txt", "r", encoding='utf-8')
 		self.Catastrophe = open("Catastrophe.txt", "r", encoding='utf-8')
 	def GenerateCharacter(self,	Num):
-		for NewCharacter in range(Num):
+		for NewCharacter in range(1, Num+1):
+			print(Num)
 			NewPerson = Pers.Person(self.Character)
-			#NewPerson.OutputFile = open(str(Num)+".txt", "w", encoding='utf-8')
+			NewPerson.OutputFile = open(str(NewCharacter)+".txt", "w", encoding='utf-8')
 			NewPerson.Generate()
 
 def main():
 	GeneratorInst = Generator()
 	GeneratorInst.FileApp()
-	GeneratorInst.GenerateCharacter(1)
+	GeneratorInst.GenerateCharacter(2)
 
 if __name__ == '__main__':
 	main()
