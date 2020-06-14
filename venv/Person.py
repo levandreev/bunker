@@ -54,5 +54,5 @@ class Person(object):
 		else:
 			Orientation = "гомо"
 		self.OutputFile.writelines("Пол: {}, возраст: {}, ориентация: {}\n".format(Sex, str(Age), Orientation))
-		self.OutputFile.writelines("Профессия: чет")
+		self.OutputFile.writelines("Профессия: {}".format(self.profList.pop(random.randint(0,len(self.profList)))))
 		self.OutputFile.close()
