@@ -18,13 +18,13 @@ class Generator(object):
 	def GenerateCharacter(self,	Num):
 		for NewCharacter in range(Num):
 			NewPerson = Pers.Person(self.Character)
-			#NewPerson.OutputFile = open(str(Num)+".dxt", "w", encoding='utf-8')
+			#NewPerson.OutputFile = open(str(Num)+".txt", "w", encoding='utf-8')
 			NewPerson.Generate()
 
 def main():
 	GeneratorInst = Generator()
 	GeneratorInst.FileApp()
-	GeneratorInst.GenerateCharacter(2)
+	GeneratorInst.GenerateCharacter(1)
 
 if __name__ == '__main__':
 	main()
