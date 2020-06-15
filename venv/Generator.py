@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 import os, time
 import Person as Pers
+import Catastrophe as Catas
 
 class Generator(object):
 	Character = None
@@ -12,20 +13,22 @@ class Generator(object):
 
 	def FileApp(self):
 		self.Character = open("Character.txt", "r", encoding='utf-8')
-		self.ActionCards = open("ActionCards.txt", "r", encoding='utf-8')
 		self.Bunker = open("Bunker.txt", "r", encoding='utf-8')
 		self.Catastrophe = open("Catastrophe.txt", "r", encoding='utf-8')
 	def GenerateCharacter(self,	Num):
-		for NewCharacter in range(1, Num+1):
-			print(Num)
-			NewPerson = Pers.Person(self.Character)
-			NewPerson.OutputFile = open(str(NewCharacter)+".txt", "w", encoding='utf-8')
-			NewPerson.Generate()
+		for NewCharacterNum in range(1, Num+1):
+			NewCharacter = Pers.Character()
+			NewCharacter.OutputFile = open(str(NewCharacterNum)+".txt", "w", encoding='utf-8')
+			NewCharacter.Generate()
+	def GenerateChatastrophe(self):
+		Cat = Catas.Catastrophe()
+		Cat.Generate()
 
 def main():
 	GeneratorInst = Generator()
 	GeneratorInst.FileApp()
-	GeneratorInst.GenerateCharacter(2)
+	GeneratorInst.GenerateCharacter(5)
+	GeneratorInst.GenerateChatastrophe()
 
 if __name__ == '__main__':
 	main()

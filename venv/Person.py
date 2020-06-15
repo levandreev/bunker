@@ -1,58 +1,74 @@
-import random
-class Person(object):
+import Parser, random
+class Character(object):
 	OutputFile = None
-	PersonFile = None
+	CharacterFile = "Character.txt"
 	profList = list()
 	hobbyList = list()
 	traitList = list()
+	healthList = list()
+	phobiaList = list()
+	bagageList = list()
+	addInfoList = list()
+	actionCardsList = list()
 
-
-
-	def __init__(self, PersonF):
-		super(Person, self).__init__()
-		self.PersonFile = PersonF
+	def __init__(self):
+		super(Character, self).__init__()
 		self.getProf()
 		self.getHobby()
 		self.getTrait()
+		self.getHealth()
+		self.getPhobia()
+		self.getBagage()
+		self.getAddInfo()
+		self.getActionCards()
 
 	def getProf(self):
-		self.profList = self.Parse("=ПРОФЕССИИ=")
-		print(self.profList)
+		self.profList = Parser.Parse("=ПРОФЕССИИ=", self.CharacterFile)
 	def getHobby(self):
-		self.hobbyList = self.Parse("=ХОББИ=")
-		print(self.hobbyList)
+		self.hobbyList = Parser.Parse("=ХОББИ=", self.CharacterFile)
 	def getTrait(self):
-		self.traitList = self.Parse("=ЧЕРТЫ=")
-		print(self.traitList)
-	def Parse(self, mod):
-		self.PersonFile.seek(0)
-		result = list()
-		FirstEntry = False
-		for lineNum, Line in enumerate(self.PersonFile, 1):
-			if str(mod) in Line and FirstEntry == False:
-				FirstEntry = True
-				continue
-			elif str(mod) in Line and FirstEntry == True:
-				break
-			if FirstEntry == True:
-				result.append(Line.strip())
-		return result
+		self.traitList = Parser.Parse("=ЧЕРТЫ=", self.CharacterFile)
+	def getHealth(self):
+		self.healthList = Parser.Parse("=ЗДОРОВЬЕ=", self.CharacterFile)
+	def getPhobia(self):
+		self.phobiaList = Parser.Parse("=ФОБИИ=", self.CharacterFile)
+	def getBagage(self):
+		self.bagageList = Parser.Parse("=БАГАЖ=", self.CharacterFile)
+	def getAddInfo(self):
+		self.addInfoList = Parser.Parse("=ДОП.ИНФО=", self.CharacterFile)
+	def getActionCards(self):
+		self.actionCardsList = Parser.Parse("=КАРТЫ ДЕЙСТВИЙ=", self.CharacterFile)
+
+	def CorrectAge(self, Age):
+		Q = Age % 10
+		if (Q > 9) and (Age < 20) or (Age > 110) or (Q > 4) or (Q==0):
+			return (str(Age) + " лет")
+		else:
+			if Q == 1: return (str(Age) + " год")
+			else:
+				return (str(Age) + " года")
 
 	def Generate(self):
-		# Пол, возраст, ориентация
-		# Профессия
-		#
-		Sex = random.randint(1, 100)
-		if Sex < 60:
-			Sex = "мужчина"
-		else:
-			Sex = "женщина"
+		# Пол, возраст, ориентация [Готово]
+		# Профессия [Готово]
+		# Состояние здоровья [Готово]
+		# Телосложение [Не используется]
+		# Человеческая черта [Готово]
+		# Хобби [Готово]
+		# Фобия [Готово]
+		# Багаж [Готово]
+		# Доп. информация [Готово]
+		# Карты действия [Готово]
+		Sex = {1: "Мужчина", 2:"Женщина"}
+		Orientation = {1: "гетеро", 2: "би", 3: "гомо"}
 		Age = random.randint(16, 100)
-		Orientation = random.randint(1, 100)
-		if Orientation < 60:
-			Orientation = "гетеро"
-		else:
-			Orientation = "гомо"
-		self.OutputFile.writelines("Пол: {}, возраст: {}, ориентация: {}\n".format(Sex, str(Age), Orientation))
-		self.OutputFile.writelines("Профессия: {}".format(self.profList.pop(random.randint(0,len(self.profList)))))
+		self.OutputFile.writelines("{}, {}, ориентация: {}\n".format(Sex[random.randint(1,2)], self.CorrectAge(Age), Orientation[random.randint(1,3)]))
+		self.OutputFile.writelines("Профессия: {}\n".format(random.choice(self.profList)))
+		self.OutputFile.writelines("Состояние здоровья: {}\n".format(random.choice(self.healthList)))
+		self.OutputFile.writelines("Человеческая черта: {}\n".format(random.choice(self.traitList)))
+		self.OutputFile.writelines("Хобби: {}\n".format(random.choice(self.hobbyList)))
+		self.OutputFile.writelines("Фобия: {}\n".format(random.choice(self.phobiaList)))
+		self.OutputFile.writelines("Багаж: {}\n".format(random.choice(self.bagageList)))
+		self.OutputFile.writelines("Доп. информация: {}\n".format(random.choice(self.addInfoList)))
+		self.OutputFile.writelines("Карты действий:\n1 - {}\n2 - {}\n".format(random.choice(self.actionCardsList), random.choice(self.actionCardsList)))
 		self.OutputFile.close()
