@@ -4,7 +4,7 @@ class Catastrophe(object):
 	CatastropheFile = "Catastrophe.txt"
 	BunkerFile = "Bunker.txt"
 	Scenario = list()
-	Bunker = {"ТОПОГРАФИЯ": "", "ОБОРУДОВАНИЕ": "", "УСТРОЙСТВО": "", "РАЗМЕР": ""}
+	Bunker = {"ТОПОГРАФИЯ": "", "ОБОРУДОВАНИЕ": "", "УСТРОЙСТВО": "", "РАЗМЕР": "", "ЗАПАС": ""}
 	ScenCount = 7
 
 	def __init__(self):
@@ -20,7 +20,7 @@ class Catastrophe(object):
 		self.Bunker["ОБОРУДОВАНИЕ"] = "В бункере есть: {}.".format(random.choice(Parser.Parse("=ОБОРУДОВАНИЕ=", self.BunkerFile)))
 		self.Bunker["УСТРОЙСТВО"] = "Особенности бункера: {}.".format(random.choice(Parser.Parse("=УСТРОЙСТВО=", self.BunkerFile)))
 		self.Bunker["РАЗМЕР"] = "Размер бункера: {} кв. м. ".format(random.randint(150, 600))
-
+		self.Bunker["ЗАПАС"] = "Запасов хватит на: {} месяцев.".format(random.randint(4, 60))
 	def CreateImage(self):
 		max_w, max_h = 0, 0
 		text_size = 20
