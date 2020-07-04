@@ -9,7 +9,11 @@ class Catastrophe(object):
 
 	def __init__(self):
 		super(Catastrophe, self).__init__()
-	def Generate(self):
+	def Generate(self, custom_catastrophe):
+		if custom_catastrophe:
+			ScenCount = 9
+		else:
+			ScenCount = 7
 		mode ="["+ str(random.randint(1, self.ScenCount))+"]"
 		self.Scenario = Parser.Parse(mode, self.CatastropheFile)
 		self.GenerateBunker()

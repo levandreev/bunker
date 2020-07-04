@@ -47,8 +47,14 @@ class Character(object):
 			if Q == 1: return (str(Age) + " год")
 			else:
 				return (str(Age) + " года")
-
-	def Generate(self):
+	def Bragging(self, mode):
+		str = ""
+		if mode:
+			brag = random.randint(0,100)
+			if brag >= 90:
+				str = "[Хвастовство]"
+		return str
+	def Generate(self, custom_bragging):
 		# Пол, возраст, ориентация [Готово]
 		# Профессия [Готово]
 		# Состояние здоровья [Готово]
@@ -62,13 +68,13 @@ class Character(object):
 		Sex = {1: "Мужчина", 2:"Женщина"}
 		Orientation = {1: "гетеро", 2: "би", 3: "гомо"}
 		Age = random.randint(16, 100)
-		self.OutputFile.writelines("{}, {}, ориентация: {}\n".format(Sex[random.randint(1,2)], self.CorrectAge(Age), Orientation[random.randint(1,3)]))
+		self.OutputFile.writelines("{}, {}, ориентация: {} {}\n".format(Sex[random.randint(1,2)], self.CorrectAge(Age), Orientation[random.randint(1,3)], self.Bragging(custom_bragging)))
 		self.OutputFile.writelines("Профессия: {}\n".format(random.choice(self.profList)))
-		self.OutputFile.writelines("Состояние здоровья: {}\n".format(random.choice(self.healthList)))
-		self.OutputFile.writelines("Человеческая черта: {}\n".format(random.choice(self.traitList)))
-		self.OutputFile.writelines("Хобби: {}\n".format(random.choice(self.hobbyList)))
-		self.OutputFile.writelines("Фобия: {}\n".format(random.choice(self.phobiaList)))
-		self.OutputFile.writelines("Багаж: {}\n".format(random.choice(self.bagageList)))
-		self.OutputFile.writelines("Доп. информация: {}\n".format(random.choice(self.addInfoList)))
+		self.OutputFile.writelines("Состояние здоровья: {} {}\n".format(random.choice(self.healthList), self.Bragging(custom_bragging)))
+		self.OutputFile.writelines("Человеческая черта: {} {}\n".format(random.choice(self.traitList), self.Bragging(custom_bragging)))
+		self.OutputFile.writelines("Хобби: {} {}\n".format(random.choice(self.hobbyList), self.Bragging(custom_bragging)))
+		self.OutputFile.writelines("Фобия: {} {}\n".format(random.choice(self.phobiaList), self.Bragging(custom_bragging)))
+		self.OutputFile.writelines("Багаж: {} {}\n".format(random.choice(self.bagageList), self.Bragging(custom_bragging)))
+		self.OutputFile.writelines("Доп. информация: {} {}\n".format(random.choice(self.addInfoList),  self.Bragging(custom_bragging)))
 		self.OutputFile.writelines("Карты действий:\n1 - {}\n2 - {}\n".format(random.choice(self.actionCardsList), random.choice(self.actionCardsList)))
 		self.OutputFile.close()
